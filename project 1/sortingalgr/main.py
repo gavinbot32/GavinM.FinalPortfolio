@@ -95,17 +95,21 @@ def mergeSort(list):
     return list
 def randomSort(list):
     global rounds
-    for i in range(len(list)):
-        # for j in range(i+1,len(list)):
-        rounds += 1
-        x = random.choice(list)
-        y = random.choice(list)
-        if x < y:
-            z = list.pop(x-1)
-            list.insert(0,z)
-        elif y < x:
-            z = list.pop(y-1)
-            list.insert(0, z)
+    n = len(list)
+    for i in range(n):
+        for j in range(n-i):
+            rounds += 1
+            x = random.choice(list)
+            if x < list[j]:
+                index = list.index(j+1)
+                z = list.pop(x)
+
+                list.insert(0,z)
+            elif list[j] < x:
+                index = list.index(j+1)
+                z = list.pop(j)
+
+                list.insert(index,z)
     return list
 
 
