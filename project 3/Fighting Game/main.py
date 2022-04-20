@@ -16,6 +16,7 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
+        self.last_update = 0
         self.font_name = pg.font.match_font(FONT_NAME)
         self.load_data()
     def load_data(self):
@@ -58,11 +59,13 @@ class Game:
                         self.playing = False
                     self.running = False
                 for player in self.players:
+                    now = pg.time.get_ticks()
                     if event.key == player.keybinds[0]:
                         player.jump()
                     if event.key == player.keybinds[3]:
-                        player.punch()
-
+                        if now - self.last_update > 150:
+                            self.last_update = now
+                            player.punch()
     def new(self):
         #start a new game
         self.score = 0

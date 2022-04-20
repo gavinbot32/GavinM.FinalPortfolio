@@ -41,23 +41,17 @@ class Player(pg.sprite.Sprite):
         if hits:
             self.vel.y = -25
     def punch(self):
-        now = pg.time.get_ticks()
-        self.arm = pg.Surface((20,10))
-        self.arm.fill(BLACK)
-        self.arm_rect = self.arm.get_rect()
+        self.vel.x = 0
+        self.acc.x = 0
         if self.facingR:
-            self.arm_rect.center = (self.rect.x + self.rect.x // 2, self.rect.y // 2 - 10)
+            Collider(self.rect.centerx, self.rect.centery, self.rect.width * 2, 30,self.game)
         else:
-            self.arm_rect.center = (self.rect.x - self.rect.x // 2, self.rect.y // 2 - 10)
-        if now - self.last_update > 140:
-            self.last_update = now
-            self.arm = self.pg.Surface((0, 0))
-
-
+            Collider(self.rect.centerx - self.rect.centerx / 2 / 2, self.rect.centery, self.rect.width * 2, 30,self.game)
 
 
     def update(self):
         #movement
+
         self.animate()
         self.acc = vec(0,PLAYER_GRAVITY)
         keys = pg.key.get_pressed()
@@ -123,3 +117,24 @@ class Platform(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+class Collider(pg.sprite.Sprite):
+    def __init__(self, x, y, width, height,game):
+        pg.sprite.Sprite.__init__(self)
+        self.game = game
+        self.image = pg.Surface((width, height)).convert()
+        #self.image.fill(c.RED)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.state = None
+        self.kill_timer = 10
+        self.game.all_sprites.add(self)
+    def update(self):
+
+        self.kill_timer -= 1
+        if self.kill_timer == 0:
+            self.kill()
+            self.rect.y + 3000
+            self.kill_timer = 10
+
