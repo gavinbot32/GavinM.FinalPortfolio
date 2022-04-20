@@ -1,9 +1,6 @@
-#Gavin Murdock
+ #Gavin Murdock
 #4/14/22
 #Doodle Jump
-
-
-
 import pygame as pg
 import random
 from settings import *
@@ -25,7 +22,8 @@ class Game:
     def load_data(self):
         # load high score
         self.dir = path.dirname(__file__)
-        img_dir = path.join(self.dir,'imgs')
+        asset_dir = path.join(self.dir,'assets')
+        img_dir = path.join(asset_dir,'imgs')
         with open(path.join(self.dir,HS_FILE),'r') as f:
             try:
                 self.highscore = int(f.read())
@@ -41,7 +39,7 @@ class Game:
         self.player = Player(self)
         self.all_sprites.add(self.player)
         for plat in PLATFORM_LIST:
-            p = Platform(*plat)
+            p = Platform(self, *plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
 
@@ -59,15 +57,19 @@ class Game:
         #game loop-update
         self.all_sprites.update()
         if self.player.vel.y > 0:
-            hits = pg.sprite.spritecollide(self.player,self.platforms,False)
+            hits = pg.sprite.spritecollide(self.player, self.platforms, False)
             if hits:
-
-                self.player.vel.y = 1
-                self.player.pos.y = hits[0].rect.top
+                lowest = hits[0]
+                for hit in hits:
+                    if hit.rect.bottom > lowest.rect.bottom:
+                        lowest = hit
+                if self.player.pos.y < lowest.rect.bottom:
+                    self.player.pos.y = lowest.rect.top
+                    self.player.vel.y = 0
         if self.player.rect.top <= HEIGHT / 4:
-            self.player.pos.y += abs(self.player.vel.y)
+            self.player.pos.y += max(abs(self.player.vel.y),10)
             for plat in self.platforms:
-                plat.rect.y += abs(self.player.vel.y)
+                plat.rect.y += max(abs(self.player.vel.y),10)
                 if plat.rect.top >= HEIGHT:
                     plat.kill()
                     self.score +=1
@@ -83,9 +85,8 @@ class Game:
         #spawn new platforms to keep same average
         while len(self.platforms) < 6:
             width = random.randrange(50,100)
-            p = Platform(random.randrange(0,WIDTH - width),
-                         random.randrange(-50,-30),
-                         width, 20)
+            p = Platform(self,random.randrange(0,WIDTH - width),
+                         random.randrange(-50,-30))
             self.platforms.add(p)
             self.all_sprites.add(p)
 
@@ -105,6 +106,7 @@ class Game:
         self.screen.fill(cfBLUE)
         # Draw all sprites
         self.all_sprites.draw(self.screen)
+        self.screen.blit(self.player.image,self.player.rect)
         self.draw_text(str(self.score),22,WHITE,WIDTH/2,15)
         # Must be the last thing called in the draw section
         pg.display.flip()
