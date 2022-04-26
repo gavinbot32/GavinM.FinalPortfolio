@@ -21,47 +21,65 @@ class Player(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.keybinds = keybinds
         self.game = game
+        self.game.all_sprites.add(self)
         self.walking = False
         self.jumping = False
         self.facingR = True
+        self.disabled = False
         self.current_frame = 0
         self.last_update = 0
         self.load_images()
         self.image = self.idle_frames[0]
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
-        self.pos = vec(40, HEIGHT -100)
+        spawn = random.choice(game.SPAWN_ZONES)
+        game.SPAWN_ZONES.remove(spawn)
+        self.pos = vec(spawn)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
+        self.health = 100
+        self.heal_timer = 50
     def jump(self):
         # jump only if standing on a platform
-        self.rect.x += 2
-        hits = pg.sprite.spritecollide(self, self.game.platforms, False)
-        self.rect.x -= 2
-        if hits:
-            self.vel.y = -25
+        if not self.disabled:
+            self.rect.x += 2
+            hits = pg.sprite.spritecollide(self, self.game.platforms, False)
+            self.rect.x -= 2
+            if hits:
+                self.vel.y = -25
     def punch(self):
-        self.vel.x = 0
-        self.acc.x = 0
-        if self.facingR:
-            Collider(self.rect.centerx, self.rect.centery, self.rect.width * 2, 30,self.game)
-        else:
-            Collider(self.rect.centerx - self.rect.centerx / 2 / 2, self.rect.centery, self.rect.width * 2, 30,self.game)
-
-
+        if not self.disabled:
+            self.vel.x = 0
+            self.acc.x = 0
+            if self.facingR:
+                Collider(self.rect.centerx, self.rect.centery, self.rect.width, 30,self.game,2,self,10)
+            else:
+                Collider(self.rect.centerx-self.rect.width , self.rect.centery,  self.rect.width, 30,self.game,2,self,10)
+    def kick(self):
+        if not self.disabled:
+            self.vel.x = 0
+            self.acc.x = 0
+            if self.facingR:
+                Collider(self.rect.centerx, self.rect.centery+ self.rect.centery /8, self.rect.width, 30,self.game,2,self,20)
+            else:
+                Collider(self.rect.centerx-self.rect.width , self.rect.centery + self.rect.centery /8,  self.rect.width, 30,self.game,2,self,20)
     def update(self):
         #movement
-
+        self.heal_timer -=1
+        if self.heal_timer <= 0:
+            if self.health < 100:
+                self.health += 10
+            self.heal_timer = 100
         self.animate()
         self.acc = vec(0,PLAYER_GRAVITY)
         keys = pg.key.get_pressed()
-        if keys[self.keybinds[1]]:
-            self.acc.x = -PLAYER_ACC
-            self.facingR = False
-        if keys[self.keybinds[2]]:
-            self.acc.x = PLAYER_ACC
-            self.facingR = True
-
+        if not self.disabled:
+            if keys[self.keybinds[1]]:
+                self.acc.x = -PLAYER_ACC
+                self.facingR = False
+            if keys[self.keybinds[2]]:
+                self.acc.x = PLAYER_ACC
+                self.facingR = True
         #Friction
         self.acc.x += self.vel.x * PLAYER_FRICTION
         #equations of motion
@@ -117,24 +135,45 @@ class Platform(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-
 class Collider(pg.sprite.Sprite):
-    def __init__(self, x, y, width, height,game):
+    def __init__(self, x, y, width, height,game,kill_timer,owner,damage):
         pg.sprite.Sprite.__init__(self)
         self.game = game
+        self.game.colliders.add(self)
+        self.owner = owner
+        self.damage = damage
         self.image = pg.Surface((width, height)).convert()
         #self.image.fill(c.RED)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.state = None
-        self.kill_timer = 10
+        self.kill_timer = kill_timer
+        self.kill_time = kill_timer
         self.game.all_sprites.add(self)
     def update(self):
-
         self.kill_timer -= 1
         if self.kill_timer == 0:
             self.kill()
-            self.rect.y + 3000
-            self.kill_timer = 10
-
+            # self.rect.y + 3000
+            self.kill_timer = self.kill_time
+class Bar(pg.sprite.Sprite):
+    def __init__(self,game,w,h,x,y):
+        pg.sprite.Sprite.__init__(self)
+        self.game = game
+        if w <= 0:
+            w = 10
+        self.image = pg.Surface((w,h))
+        self.image.fill(GREEN)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.kill_timer = 2
+        self.kill_time = 2
+        self.game.all_sprites.add(self)
+    def update(self):
+        self.kill_timer -= 1
+        if self.kill_timer == 0:
+            self.kill()
+            # self.rect.y + 3000
+            self.kill_timer = self.kill_time

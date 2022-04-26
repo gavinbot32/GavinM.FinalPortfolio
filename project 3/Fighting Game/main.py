@@ -18,6 +18,7 @@ class Game:
         self.running = True
         self.last_update = 0
         self.font_name = pg.font.match_font(FONT_NAME)
+        self.winner = 0
         self.load_data()
     def load_data(self):
         # load high score
@@ -30,6 +31,11 @@ class Game:
     def update(self):
         #game loop-update
         self.all_sprites.update()
+        now = pg.time.get_ticks()
+        for player in self.players:
+            if player.disabled:
+                if now - self.last_update > 200:
+                    player.disabled = False
         for player in self.players:
             if player.vel.y > 0:
                 hits = pg.sprite.spritecollide(player, self.platforms, False)
@@ -41,6 +47,24 @@ class Game:
                     if player.pos.y < lowest.rect.bottom:
                         player.pos.y = lowest.rect.top
                         player.vel.y = 0
+        for player in self.players:
+
+            hits = pg.sprite.spritecollide(player, self.colliders, False)
+            if hits:
+                for hit in hits:
+                    if hit.owner == player:
+                        pass
+                    else:
+                        player.health -= hit.damage
+                        player.disabled = True
+        for player in self.players:
+            if player.health <= 0:
+                if player == self.players[0]:
+                    self.winner = 2
+                    self.playing = False
+                else:
+                    self.winner = 1
+                    self.playing = False
 
 
 
@@ -66,20 +90,27 @@ class Game:
                         if now - self.last_update > 150:
                             self.last_update = now
                             player.punch()
+                    if event.key == player.keybinds[4]:
+                        if now - self.last_update > 250:
+                            self.last_update = now
+                            player.kick()
     def new(self):
         #start a new game
         self.score = 0
+        self.SPAWN_ZONES = [(100, HEIGHT - 100), (1500, HEIGHT - 100), (1000, HEIGHT - 100), (550, HEIGHT - 100),
+                       (1700, HEIGHT - 100), (1340, HEIGHT - 100)]
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
+        self.colliders = pg.sprite.Group()
         self.players = []
+        self.winner = 0
         for i in range(2):
-            player = Player(self, KEYBIND_GP[i],PLAYER_COLORS[i])
-            self.players.append(player)
-            self.all_sprites.add(player)
+            self.players.append(Player(self, KEYBIND_GP[i],PLAYER_COLORS[i]))
         for plat in PLATFORM_LIST:
             p = Platform(self, *plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
+
 
         self.run()
     def run(self):
@@ -99,18 +130,22 @@ class Game:
         self.all_sprites.draw(self.screen)
         for i in range(len(self.players)):
             player = self.players[i]
-            self.screen.blit(player.image,player.rect)
-        for i in range(len(self.players)):
-            player = self.players[i]
-            self.draw_text(str(i+1),22,WHITE,player.rect.x+ player.rect.width / 2,player.rect.y- player.rect.width // 4)
+            self.draw_text(str(i+1), 22, PLAYER_COLORS[i], player.rect.x + player.rect.width / 2,
+                           player.rect.y - 60)
+            if player.facingR:
+                Bar(self,player.health + 1,10,player.rect.left,player.rect.y - 20)
+            else:
+                Bar(self, player.health + 1, 10, player.rect.centerx - 20, player.rect.y - 20)
         # Must be the last thing called in the draw section
         pg.display.flip()
     def show_start_screen(self):
         #start screen Template
         self.screen.fill(cfBLUE)
-        self.draw_text(TITLE,48,WHITE,WIDTH/2, HEIGHT/4)
-        self.draw_text("This is a Template Screen", 22,WHITE,WIDTH / 2, HEIGHT/2)
-        self.draw_text("Press a key to play", 22,WHITE,WIDTH/2,HEIGHT * 3/4)
+        self.draw_text(TITLE,72,WHITE,WIDTH/2, HEIGHT/4)
+        self.draw_text("Controls: Jump, Left, Right, Punch, Kick", 45, GREY, WIDTH / 2, HEIGHT / 2 - 100)
+        self.draw_text("Player 1: W, A, D, E, Q ", 50,PLAYER_COLORS[0],WIDTH / 2, HEIGHT/2 - 50)
+        self.draw_text("Player 2: Up, Left, Right, Num1, Num2 ", 50, PLAYER_COLORS[1], WIDTH / 2, HEIGHT / 2)
+        self.draw_text("Press Enter to play", 22,WHITE,WIDTH/2,HEIGHT * 3/4)
         pg.display.flip()
         self.wait_for_key()
     def show_go_screen(self):
@@ -118,9 +153,12 @@ class Game:
         if not self.running:
             return
         self.screen.fill(cfBLUE)
-        self.draw_text("GAME OVER", 48, WHITE, WIDTH / 2, HEIGHT / 4)
-        self.draw_text("Score: " + str(self.score), 22, WHITE, WIDTH / 2, HEIGHT / 2 - 30)
-        self.draw_text("Press a key to play again", 22, WHITE, WIDTH / 2, HEIGHT * 3 / 4)
+        text = ("Player "+str(self.winner)+" Wins")
+        self.draw_text(text, 48, WHITE, WIDTH / 2, HEIGHT / 4)
+        self.draw_text("Controls: Jump, Left, Right, Punch, Kick", 45, GREY, WIDTH / 2, HEIGHT / 2 - 100)
+        self.draw_text("Player 1: W, A, D, E, Q ", 50,PLAYER_COLORS[0],WIDTH / 2, HEIGHT/2 - 50)
+        self.draw_text("Player 2: Up, Left, Right, Num1, Num2 ", 50, PLAYER_COLORS[1], WIDTH / 2, HEIGHT / 2)
+        self.draw_text("Press Enter to play again", 22, WHITE, WIDTH / 2, HEIGHT * 3 / 4)
         pg.display.flip()
         self.wait_for_key()
     def wait_for_key(self):
@@ -131,8 +169,12 @@ class Game:
                 if event.type == pg.QUIT:
                     waiting = False
                     self.running = False
-                if event.type == pg.KEYUP:
-                    waiting = False
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_RETURN:
+                        waiting = False
+                    if event.key == pg.K_ESCAPE:
+                        waiting = False
+                        self.running = False
     def draw_text(self,text,size,color,x,y):
         font = pg.font.Font(self.font_name,size)
         text_surface = font.render(text,True, color)
