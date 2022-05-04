@@ -20,7 +20,11 @@ class Game:
         self.load_data()
     def load_data(self):
         game_folder = path.dirname(__file__)
+        img_folder = path.join(game_folder,'imgs')
         self.map = Map(path.join(game_folder,'map.txt'))
+        self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
+        self.wall_img = pg.image.load(path.join(img_folder, WALL_IMG)).convert_alpha()
+        self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE,TILESIZE))
     def new(self):
         #start a new game
         self.all_sprites = pg.sprite.Group()
@@ -36,7 +40,7 @@ class Game:
                     else:
                         self.player = Player(self, col,row)
                         self.players.append(self.player)
-
+        self.camera = Camera(self.map.width,self.map.height)
         self.run()
     def run(self):
         #game loop
@@ -50,6 +54,7 @@ class Game:
     def update(self):
         #game loop-update
         self.all_sprites.update()
+        self.camera.update(self.player)
     def events(self):
         #game loop events
         for event in pg.event.get():
@@ -71,11 +76,13 @@ class Game:
             pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
 
     def draw(self):
+        pg.display.set_caption("{:.1f}".format(self.clock.get_fps()))
         #game loop draw
         self.screen.fill(BGCOLOR)
-        self.draw_grid()
+        # self.draw_grid()
         # Draw all sprites
-        self.all_sprites.draw(self.screen)
+        for sprite in self.all_sprites:
+            self.screen.blit(sprite.image,self.camera.apply(sprite))
         # Must be the last thing called in the draw section
         pg.display.flip()
     def show_start_screen(self):
