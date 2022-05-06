@@ -23,17 +23,25 @@ class Game:
         img_folder = path.join(game_folder,'imgs')
         self.map = Map(path.join(game_folder,'map.txt'))
         self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
+        self.mob_img = pg.image.load(path.join(img_folder, MOB_IMG)).convert_alpha()
+        self.bullet_img = pg.image.load(path.join(img_folder, BULLET_IMG)).convert_alpha()
         self.wall_img = pg.image.load(path.join(img_folder, WALL_IMG)).convert_alpha()
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE,TILESIZE))
+        self.player_img = pg.transform.scale(self.player_img, (TILESIZE*0.75,TILESIZE*0.75))
+        self.mob_img = pg.transform.scale(self.mob_img, (TILESIZE*0.75,TILESIZE*0.75))
     def new(self):
         #start a new game
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
+        self.mobs = pg.sprite.Group()
+        self.bullets = pg.sprite.Group()
         self.players = []
         for row, tiles in enumerate(self.map.data):
             for col,tile in enumerate(tiles):
                 if tile == '1':
                     Wall(self,col,row)
+                if tile == 'M':
+                    Mob(self,col,row)
                 if tile == 'P':
                     if len(self.players) >= 1:
                         pass
@@ -55,6 +63,10 @@ class Game:
         #game loop-update
         self.all_sprites.update()
         self.camera.update(self.player)
+
+        hits = pg.sprite.groupcollide(self.mobs,self.bullets,False,True)
+        for hit in hits:
+            hit.kill()
     def events(self):
         #game loop events
         for event in pg.event.get():
