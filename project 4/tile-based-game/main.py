@@ -42,7 +42,10 @@ class Game:
     def load_data(self):
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder,'imgs')
-        self.map = Map(path.join(game_folder,'map.txt'))
+        map_folder = path.join(game_folder,'maps')
+        self.map = TiledMap(path.join(map_folder,'tiled1.tmx'))
+        self.map_img = self.map.make_map()
+        self.map_rect = self.map_img.get_rect()
         self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
         self.mob_img = pg.image.load(path.join(img_folder, MOB_IMG)).convert_alpha()
         self.bullet_img = pg.image.load(path.join(img_folder, BULLET_IMG)).convert_alpha()
@@ -57,18 +60,20 @@ class Game:
         self.mobs = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
         self.players = []
-        for row, tiles in enumerate(self.map.data):
-            for col,tile in enumerate(tiles):
-                if tile == '1':
-                    Wall(self,col,row)
-                if tile == 'M':
-                    Mob(self,col,row)
-                if tile == 'P':
-                    if len(self.players) >= 1:
-                        pass
-                    else:
-                        self.player = Player(self, col,row)
-                        self.players.append(self.player)
+
+        # for row, tiles in enumerate(self.map.data):
+        #     for col,tile in enumerate(tiles):
+        #         if tile == '1':
+        #             Wall(self,col,row)
+        #         if tile == 'M':
+        #             Mob(self,col,row)
+        #         if tile == 'P':
+        #             if len(self.players) >= 1:
+        #                 pass
+        #             else:
+        #                 self.player = Player(self, col,row)
+        #                 self.players.append(self.player)
+        self.player =  Player(self,5,5)
         self.camera = Camera(self.map.width,self.map.height)
         self.run()
     def run(self):
@@ -120,7 +125,8 @@ class Game:
     def draw(self):
         pg.display.set_caption("{:.1f}".format(self.clock.get_fps()))
         #game loop draw
-        self.screen.fill(BGCOLOR)
+        # self.screen.fill(BGCOLOR)
+        self.screen.blit(self.map_img,self.camera.apply_rect(self.map_rect))
         # self.draw_grid()
         # Draw all sprites
         for sprite in self.all_sprites:
