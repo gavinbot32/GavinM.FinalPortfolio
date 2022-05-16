@@ -40,7 +40,7 @@ QUIT_IMG = "Quit.png"
 #Player Settings
 PLAYER_HEALTH = 100
 PLAYER_SPEED = 300
-PLAYER_ROT_SPEED = 360 #drg/s
+PLAYER_ROT_SPEED = 300 #drg/s
 PLAYER_HIT_RECT = pg.Rect(0,0,35,35)
 BARREL_OFFSET = vec(30,10)
 PLAYER_IMG = "Player.png"

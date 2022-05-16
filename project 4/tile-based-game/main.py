@@ -73,8 +73,17 @@ class Game:
         #             else:
         #                 self.player = Player(self, col,row)
         #                 self.players.append(self.player)
-        self.player =  Player(self,5,5)
+        for tile_object in self.map.tmxdata.objects:
+            if tile_object.name == 'player':
+                if len(self.players) < 1:
+                    self.player = Player(self,tile_object.x,tile_object.y)
+                    self.players.append(self.player)
+            if tile_object.name == 'wall':
+                Obstacle(self,tile_object.x,tile_object.y,tile_object.width,tile_object.height)
+            if tile_object.name == 'mob':
+                Mob(self,tile_object.x,tile_object.x)
         self.camera = Camera(self.map.width,self.map.height)
+        self.draw_debug = False
         self.run()
     def run(self):
         #game loop
@@ -104,6 +113,8 @@ class Game:
                     if self.playing:
                         self.playing = False
                     self.running = False
+                if event.key == pg.K_h:
+                    self.draw_debug = not self.draw_debug
         hits = pg.sprite.groupcollide(self.mobs, self.bullets, False, True)
         for hit in hits:
             hit.health -= BULLET_DMG
@@ -133,6 +144,12 @@ class Game:
             if isinstance(sprite,Mob):
                 sprite.draw_health()
             self.screen.blit(sprite.image,self.camera.apply(sprite))
+            if self.draw_debug:
+                pg.draw.rect(self.screen,BLUE,self.camera.apply_rect(sprite.hit_rect),1)
+        if self.draw_debug:
+            for wall in self.walls:
+                pg.draw.rect(self.screen,BLUE,self.camera.apply_rect(wall.rect),1)
+
         # Must be the last thing called in the draw section
 
         #HUD

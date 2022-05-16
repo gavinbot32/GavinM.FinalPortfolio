@@ -159,6 +159,7 @@ class Game:
 
     def events(self):
         self.mx, self.my = pg.mouse.get_pos()
+        self.mousePos = (self.mx,self.my)
         self.clicktimer -= 1
         if self.player.lifeBuys <= 1:
             self.lifeCost = 20
@@ -334,14 +335,14 @@ class Game:
         #             glow = pg.Surface((TILESIZE+i*2,TILESIZE+i*2))
         #             glow.fill((20,0,0))
         #             self.screen.blit(glow,((sprite.hit_rect.centerx - sprite.hit_rect.width)-i//2, (sprite.hit_rect.centery - sprite.hit_rect.height)+i//2),special_flags=pg.BLEND_RGB_ADD)
-            #
-            # if isinstance(sprite,Wall):
-            #     for i in range(10):
-            #         glow = pg.Surface((sprite.rect.width + i + 1, sprite.rect.height + i + 1))
-            #         glow.fill((0,0, 20))
-            #         self.screen.blit(glow, ((sprite.rect.centerx - sprite.rect.width) - i *2,
-            #                                 (sprite.rect.centery - sprite.rect.height) - i *2),
-            #                          special_flags=pg.BLEND_RGB_ADD)
+        #
+        #     if isinstance(sprite,Wall):
+        #         for i in range(10):
+        #             glow = pg.Surface((sprite.rect.width + i + 1, sprite.rect.height + i + 1))
+        #             glow.fill((0,0, 20))
+        #             self.screen.blit(glow, ((sprite.rect.centerx - sprite.rect.width) - i *2,
+        #                                     (sprite.rect.centery - sprite.rect.height) - i *2),
+        #                              special_flags=pg.BLEND_RGB_ADD)
         # Draw all sprites
         for sprite in self.all_sprites:
             if isinstance(sprite,Mob):
@@ -384,7 +385,7 @@ class Game:
         if self.phoenix_button.hover:
             self.draw_text("+1 Life", 22, WHITE, self.phoenix_button.rect.centerx, self.phoenix_button.rect.y-10)
             self.draw_text("Cost: " + str(self.phoenixCost), 22, WHITE, self.phoenix_button.rect.centerx, self.phoenix_button.rect.y+self.phoenix_button.rect.height-25)
-        self.draw_text("Upgrades:", 48,WHITE,150,HEIGHT-100)
+        self.draw_text("Upgrades:", 45,WHITE,150,HEIGHT-100)
         self.draw_text("(Note: If you can't afford ", 15, WHITE, 150,HEIGHT-45)
         self.draw_text("and you buy your game is over)", 15, WHITE, 150,HEIGHT-30)
 
