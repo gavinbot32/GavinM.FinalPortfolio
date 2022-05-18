@@ -51,3 +51,34 @@ MOB_DMG = 10
 MOB_KNOCKBACK = 20
 MOB_HIT_RECT = pg.Rect(0,0,30,30)
 AVOID_RADIUS = 50
+DETECT_RADIUS = 400
+
+#Effects
+MUZZLE_FLASHES = ["whitePuff15.png","whitePuff16.png","whitePuff17.png"
+    ,"whitePuff18.png"]
+FLASH_DURATION = 40
+
+BOB_SPEED = 0.26
+BOB_RANGE = 5
+
+#Layers
+WALL_LAYER = 1
+ITEMS_LAYER = 1
+PLAYER_LAYER = 2
+BULLET_LAYER = 3
+MOB_LAYER = 2
+EFFECTS_LAYER = 4
+
+#Itemms
+ITEM_IMAGES = {'health':'health_pack.png'}
+HEALTH_PACK_AMOUNT = 20
+
+#sounds
+BG_MUSIC = 'espionage.ogg'
+PLAYER_HIT_SOUNDS = ['pain/8.wav', 'pain/9.wav', 'pain/10.wav', 'pain/11.wav']
+ZOMBIE_MOAN_SOUNDS = ['brains2.wav', 'brains3.wav', 'zombie-roar-1.wav', 'zombie-roar-2.wav',
+                      'zombie-roar-3.wav', 'zombie-roar-5.wav', 'zombie-roar-6.wav', 'zombie-roar-7.wav']
+ZOMBIE_HIT_SOUNDS = ['splat-15.wav']
+WEAPON_SOUNDS_GUN = ['sfx_weapon_singleshot2.wav']
+EFFECTS_SOUNDS = {'level_start': 'level_start.wav',
+                  'health_up': 'health_pack.wav'}

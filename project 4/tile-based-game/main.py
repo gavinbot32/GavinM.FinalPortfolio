@@ -2,6 +2,7 @@
 #4/14/22
 #Doodle Jump
 import pygame as pg
+import pytweening as pyt
 import random
 import sys
 from os import path
@@ -43,6 +44,11 @@ class Game:
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder,'imgs')
         map_folder = path.join(game_folder,'maps')
+        snd_folder = path.join(game_folder,'snd')
+        music_folder = path.join(game_folder,'music')
+        pain_folder = path.join(snd_folder,'pain')
+
+
         self.map = TiledMap(path.join(map_folder,'tiled1.tmx'))
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
@@ -53,12 +59,22 @@ class Game:
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE,TILESIZE))
         self.player_img = pg.transform.scale(self.player_img, (int(TILESIZE*0.75),int(TILESIZE*0.75)))
         self.mob_img = pg.transform.scale(self.mob_img, (int(TILESIZE*0.75),int(TILESIZE*0.75)))
+        self.gun_flashes = []
+        for img in MUZZLE_FLASHES:
+            self.gun_flashes.append(pg.image.load(path.join(img_folder,img)).convert_alpha())
+        self.item_images = {}
+        for item in ITEM_IMAGES:
+            self.item_images[item] = pg.image.load(path.join(img_folder,ITEM_IMAGES[item])).convert_alpha()
+        #sound
+        pg.mixer.music.load(path.join(music_folder,BG_MUSIC))
+
     def new(self):
         #start a new game
-        self.all_sprites = pg.sprite.Group()
+        self.all_sprites = pg.sprite.LayeredUpdates()
         self.walls = pg.sprite.Group()
         self.mobs = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
+        self.items = pg.sprite.Group()
         self.players = []
 
         # for row, tiles in enumerate(self.map.data):
@@ -74,14 +90,17 @@ class Game:
         #                 self.player = Player(self, col,row)
         #                 self.players.append(self.player)
         for tile_object in self.map.tmxdata.objects:
+            obj_center = vec(tile_object.x+tile_object.width/2,tile_object.y+tile_object.height/2)
             if tile_object.name == 'player':
                 if len(self.players) < 1:
-                    self.player = Player(self,tile_object.x,tile_object.y)
+                    self.player = Player(self,obj_center.x,obj_center.y)
                     self.players.append(self.player)
             if tile_object.name == 'wall':
                 Obstacle(self,tile_object.x,tile_object.y,tile_object.width,tile_object.height)
             if tile_object.name == 'mob':
-                Mob(self,tile_object.x,tile_object.x)
+                Mob(self,obj_center.x,obj_center.y)
+            if tile_object.name == 'health':
+                Item(self,obj_center,tile_object.name)
         self.camera = Camera(self.map.width,self.map.height)
         self.draw_debug = False
         self.run()
@@ -89,6 +108,7 @@ class Game:
         #game loop
 
         self.playing = True
+        pg.mixer.music.play(loops=-1)
         while self.playing:
             self.dt = self.clock.tick(FPS) / 1000
             self.events()
@@ -103,7 +123,7 @@ class Game:
     def events(self):
         #game loop events
         for event in pg.event.get():
-            # If the red X was clicked, close the program
+            # If the red X waas clicked, close the program
             if event.type == pg.QUIT:
                 if self.playing:
                     self.playing = False
@@ -127,6 +147,15 @@ class Game:
                 self.playing = False
         if hits:
             self.player.pos += vec(MOB_KNOCKBACK,0).rotate(-hits[0].rot)
+
+        #player hits items
+        hits = pg.sprite.spritecollide(self.player,self.items,False)
+        for hit in hits:
+            if hit.type == 'health' and self.player.health < PLAYER_HEALTH:
+                hit.kill()
+                self.player.add_health(HEALTH_PACK_AMOUNT)
+
+
     def draw_grid(self):
         for x in range(0,WIDTH,TILESIZE):
             pg.draw.line(self.screen, LIGHTGREY, (x,0),(x,HEIGHT))
