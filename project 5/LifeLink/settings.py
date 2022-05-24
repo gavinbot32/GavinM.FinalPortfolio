@@ -27,6 +27,7 @@ GRIDHEIGHT = HEIGHT / TILESIZE
 
 #BASE SETTINGS
 BASE_IMG = "baseIMG.png"
+CONTROL_IMG = "Controls.png"
 MAP_FILE = "map.txt"
 
 #Upgrade Settings
@@ -60,5 +61,5 @@ MOB_DMG = 10
 MOB_KNOCKBACK = 20
 MOB_HIT_RECT = pg.Rect(0,0,30,30)
 MOB_IMG = "Enemy.png"
-
+AVOID_RADIUS = 75
 

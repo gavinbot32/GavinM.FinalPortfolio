@@ -4,6 +4,7 @@ import pygame as pg
 from random import uniform
 from settings import *
 
+#Collison Code for Sprites
 def collide_hit_rect(one,two):
     return one.hit_rect.colliderect(two.rect)
 def collide_with_walls(sprite,group,dir):
@@ -27,6 +28,7 @@ def collide_with_walls(sprite,group,dir):
             sprite.hit_rect.centery = sprite.pos.y
 
 vec = pg.math.Vector2
+#player game object
 class Player(pg.sprite.Sprite):
     def __init__(self,game,x,y):
         self._layer = PLAYER_LAYER
@@ -43,6 +45,7 @@ class Player(pg.sprite.Sprite):
         self.rot = 0
         self.last_shot = 0
         self.health = PLAYER_HEALTH
+    #Detecting Key Presses and reacts accordingly
     def get_keys(self):
         self.rot_speed = 0
         self.vel = vec(0,0)
@@ -65,6 +68,7 @@ class Player(pg.sprite.Sprite):
                 Bullet(self.game,pos,dir)
                 self.vel = vec(-KICKBACK,0).rotate(-self.rot)
                 MuzzleFlash(self.game,pos)
+                random.choice(self.game.weapon_sounds['gun']).play()
 
         if self.vel.x != 0 and self.vel.y != 0:
             self.vel *= 0.7071
@@ -74,7 +78,7 @@ class Player(pg.sprite.Sprite):
         self.health += amount
         if self.health > PLAYER_HEALTH:
             self.health = PLAYER_HEALTH
-
+    #every frame this is called and updates sprites data
     def update(self):
         self.get_keys()
         self.rot = (self.rot + self.rot_speed * self.game.dt) % 360
@@ -98,7 +102,7 @@ class Player(pg.sprite.Sprite):
         self.health_bar = pg.Rect(0,0,width, 7)
         if self.health < PLAYER_HEALTH:
             pg.draw.rect(self.image,col,self.health_bar)
-
+#sprite class for Mob game object
 class Mob(pg.sprite.Sprite):
     def __init__(self,game,x,y):
         self._layer = MOB_LAYER
@@ -118,7 +122,7 @@ class Mob(pg.sprite.Sprite):
         self.speed = MOB_SPEED + random.randint(-21,21)
         self.health = MOB_HEALTH
         self.target = game.player
-
+    #spaces each mob out away from another
     def avoid_mobs(self):
         for mob in self.game.mobs:
             if mob != self:
@@ -127,10 +131,12 @@ class Mob(pg.sprite.Sprite):
                     dist =vec(1,0)
                 if 0 < dist.length() < AVOID_RADIUS:
                     self.acc += dist.normalize()
-
+#updates sprite info
     def update(self):
         target_dist = self.target.pos - self.pos
         if target_dist.length_squared() < DETECT_RADIUS**2:
+            if random.random() < 0.002:
+                random.choice(self.game.zombie_moan_sounds).play()
             self.rot = target_dist.angle_to(vec(1,0))
             self.image = pg.transform.rotate(self.game.mob_img,self.rot)
             # self.rect = self.image.get_rect()
@@ -149,6 +155,7 @@ class Mob(pg.sprite.Sprite):
             collide_with_walls(self,self.game.walls,'y')
             self.rect.center = self.hit_rect.center
         if self.health <= 0:
+            random.choice(self.game.zombie_hit_sounds).play()
             self.kill()
 
 

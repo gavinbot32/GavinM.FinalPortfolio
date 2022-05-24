@@ -139,13 +139,24 @@ class Mob(pg.sprite.Sprite):
             self.int_health = MOB_HEALTH + MOB_HEALTH * 0.5* self.game.round
             self.speed = MOB_SPEED + MOB_SPEED * 0.5 * self.game.round
 
+    def avoid_mobs(self):
+        for mob in self.game.mobs:
+            if mob != self:
+                dist = self.pos - mob.pos
+                if dist.length() == 0:
+                    dist =vec(1,0)
+                if 0 < dist.length() < AVOID_RADIUS:
+                    self.acc += dist.normalize()
+
     def update(self):
         self.rot = (self.game.player.pos - self.pos).angle_to(vec(1,0))
         self.image = pg.transform.rotate(self.game.mob_img,self.rot)
         # self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
-        self.acc = vec(self.speed,0).rotate(-self.rot)
+        self.acc = vec(1, 0).rotate(-self.rot)
+        self.avoid_mobs()
+        self.acc.scale_to_length(self.speed)
         self.acc += self.vel * -1
         self.vel += self.acc * self.game.dt
         self.pos += self.vel * self.game.dt + 0.5 * self.acc * self.game.dt ** 2

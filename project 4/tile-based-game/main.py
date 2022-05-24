@@ -1,6 +1,4 @@
 #Gavin Murdock
-#4/14/22
-#Doodle Jump
 import pygame as pg
 import pytweening as pyt
 import random
@@ -67,7 +65,27 @@ class Game:
             self.item_images[item] = pg.image.load(path.join(img_folder,ITEM_IMAGES[item])).convert_alpha()
         #sound
         pg.mixer.music.load(path.join(music_folder,BG_MUSIC))
+        self.effects_sounds = {}
+        for type in EFFECTS_SOUNDS:
+            self.effects_sounds[type] = pg.mixer.Sound(path.join(snd_folder,EFFECTS_SOUNDS[type]))
+        self.weapon_sounds = {}
+        self.weapon_sounds['gun'] = []
+        for snd in WEAPON_SOUNDS_GUN:
+            s = pg.mixer.Sound(path.join(snd_folder, snd))
+            s.set_volume(0.15)
+            self.weapon_sounds['gun'].append(s)
+        self.zombie_moan_sounds = []
+        for snd in ZOMBIE_MOAN_SOUNDS:
 
+            s = pg.mixer.Sound(path.join(snd_folder, snd))
+            s.set_volume(0.1)
+            self.zombie_moan_sounds.append(s)
+        self.player_hit_sounds = []
+        for snd in PLAYER_HIT_SOUNDS:
+            self.player_hit_sounds.append(pg.mixer.Sound(path.join(pain_folder,snd)))
+        self.zombie_hit_sounds = []
+        for snd in ZOMBIE_HIT_SOUNDS:
+            self.zombie_hit_sounds.append(pg.mixer.Sound(path.join(pain_folder,snd)))
     def new(self):
         #start a new game
         self.all_sprites = pg.sprite.LayeredUpdates()
@@ -103,6 +121,7 @@ class Game:
                 Item(self,obj_center,tile_object.name)
         self.camera = Camera(self.map.width,self.map.height)
         self.draw_debug = False
+        self.effects_sounds['level_start'].play()
         self.run()
     def run(self):
         #game loop
@@ -141,6 +160,8 @@ class Game:
             hit.vel = vec(0,0)
         hits = pg.sprite.spritecollide(self.player, self.mobs, False, False)
         for hit in hits:
+            if random.random() < 0.7:
+                random.choice(self.player_hit_sounds).play()
             self.player.health -= MOB_DMG
             hit.vel = vec(0, 0)
             if self.player.health <=0:
@@ -154,6 +175,7 @@ class Game:
             if hit.type == 'health' and self.player.health < PLAYER_HEALTH:
                 hit.kill()
                 self.player.add_health(HEALTH_PACK_AMOUNT)
+                self.effects_sounds['health_up'].play()
 
 
     def draw_grid(self):

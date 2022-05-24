@@ -56,6 +56,7 @@ class Game:
             map = pg.transform.scale(map,(map.get_width()//4 , map.get_height()// 4))
             self.map_imgs.append(map)
         self.base_img = pg.image.load(path.join(img_folder, BASE_IMG)).convert_alpha()
+        self.control_img = pg.image.load(path.join(img_folder, CONTROL_IMG)).convert_alpha()
         self.play_img = pg.image.load(path.join(img_folder, PLAY_IMG)).convert_alpha()
         self.quit_img = pg.image.load(path.join(img_folder, QUIT_IMG)).convert_alpha()
         self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
@@ -394,6 +395,8 @@ class Game:
     def show_map_screen(self):
         clicktimer = 3
         self.screen.fill(GREY)
+        control_width = self.control_img.get_width()
+        self.control_img = pg.transform.scale(self.control_img,(control_width //2, self.control_img.get_height() //2 ))
         map_zero = self.map_imgs[0]
         map_width = map_zero.get_width()
         map_height = map_zero.get_height()
@@ -402,6 +405,7 @@ class Game:
         map_button_2 = Button(self,map_width//2 + map_width*2,HEIGHT - map_height*3,self.map_imgs[2])
         map_button_3 = Button(self,map_width//2,HEIGHT - map_height*2,self.map_imgs[3])
         map_button_4 = Button(self,map_width//2+ map_width,HEIGHT - map_height*2,self.map_imgs[4])
+        control = Button(self,map_button_4.rect.x + control_width //4, HEIGHT-self.control_img.get_height(),self.control_img)
 
         waiting = True
         while waiting:
@@ -410,6 +414,7 @@ class Game:
             self.draw_text("Select a Map", 154, RED, WIDTH // 2, (HEIGHT // 10) - 2)
             self.draw_text("Select a Map", 152, BLUE, WIDTH // 2, HEIGHT // 10)
             self.draw_text("Select a Map", 150, WHITE, WIDTH // 2, HEIGHT // 10)
+            control.draw()
             for event in pg.event.get():
                 if clicktimer <= 0:
                     if map_button_0.draw():
@@ -448,8 +453,8 @@ class Game:
                 if quit_button.draw():
                     waiting = False
                     self.running = False
+                    quit()
             pg.display.flip()
-        self.show_map_screen()
     def show_go_screen(self):
         self.screen.fill(GREY)
         link_img = self.life_img
@@ -542,6 +547,7 @@ class Game:
 
 g = Game()
 g.show_start_screen()
+g.show_map_screen()
 while g.running:
     g.new()
     g.show_go_screen()

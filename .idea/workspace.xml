@@ -1,7 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f7aa0d38-fc3f-468c-bd35-cdb9488a31d2" name="Changes" comment="" />
+    <list default="true" id="f7aa0d38-fc3f-468c-bd35-cdb9488a31d2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gavin Murdock Resume.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Gavin Murdock Resume.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 10/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project 10/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 2/doodlejump/highscore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project 2/doodlejump/highscore.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/music/tilemap_part 18_music_espionage.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/music/espionage.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/tilemap_part 18_snd_pain_10.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/pain_10.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/tilemap_part 18_snd_pain_11.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/pain_11.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/tilemap_part 18_snd_pain_12.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/pain_12.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/tilemap_part 18_snd_pain_13.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/pain_13.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/tilemap_part 18_snd_pain_14.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/pain_14.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/tilemap_part 18_snd_pain_8.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/pain_8.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/tilemap_part 18_snd_pain_9.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/pain_9.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_brains2.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/brains2.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_brains3.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/brains3.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_health_pack.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/health_up.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_level_start.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/level_start.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_sfx_weapon_singleshot2.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/sfx_weapon_singleshot2.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_splat-15.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/pain/splat-15.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_zombie-roar-1.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/zombie-roar-1.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_zombie-roar-2.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/zombie-roar-2.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_zombie-roar-3.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/zombie-roar-3.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_zombie-roar-4.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/zombie-roar-4.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_zombie-roar-5.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/zombie-roar-5.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_zombie-roar-6.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/zombie-roar-6.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_zombie-roar-7.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/zombie-roar-7.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/snd/tilemap_part 18_snd_zombie-roar-8.wav" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/snd/zombie-roar-8.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 4/tile-based-game/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/project 4/tile-based-game/sprites.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 5/LifeLink/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project 5/LifeLink/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 5/LifeLink/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project 5/LifeLink/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 5/LifeLink/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project 5/LifeLink/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 5/LifeLink/.idea/tilebased_topdown.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 5/LifeLink/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project 5/LifeLink/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 5/LifeLink/main.pyw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 5/LifeLink/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project 5/LifeLink/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 5/LifeLink/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/project 5/LifeLink/sprites.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 6/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project 6/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 7/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project 7/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 8/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project 8/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 9/FinalExam/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 9/FinalExam/.idea/FinalExam.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 9/FinalExam/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 9/FinalExam/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 9/FinalExam/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 9/FinalExam/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 9/FinalExam/exampleText.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 9/FinalExam/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project 9/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project 9/readme.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +70,122 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
+  <component name="RunManager" selected="Python.main (1)">
+    <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GavinM.FinalPortfolio" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project 6/guessnumber" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project 6/guessnumber/game.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GavinM.FinalPortfolio" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project 10/oregonTrail" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project 10/oregonTrail/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (2)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GavinM.FinalPortfolio" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project 5/LifeLink" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project 5/LifeLink/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (3)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GavinM.FinalPortfolio" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project 9/FinalExam" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project 9/FinalExam/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GavinM.FinalPortfolio" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project 6/guessnumber" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project 6/guessnumber/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.game" />
+        <item itemvalue="Python.main (3)" />
+        <item itemvalue="Python.main (2)" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -29,5 +196,16 @@
       <updated>1651806550432</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
